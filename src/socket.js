@@ -5,7 +5,7 @@ export const socket = io(
   {
     autoConnect: false,
     extraHeaders: {
-      "Access-Control-Allow-Origin": "http://localhost:3000",
+      "Access-Control-Allow-Origin": "https://post-app-express-session.onrender.com",
       "Access-Control-Allow-Credentials": "true",
     },
     withCredentials: true,

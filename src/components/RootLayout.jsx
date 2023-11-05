@@ -1,12 +1,12 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 const RootLayout = () => {
   //state trạng thái đăng nhập của người dùng
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   //hàm kiểm tra người dùng đã đăng nhập chưa
-  const checkLogin = () => {
+  const checkLogin = useCallback(() => {
     fetch(
       "https://post-app-backend-express-session.onrender.com/users/check-login",
       {
@@ -23,8 +23,8 @@ const RootLayout = () => {
         }
       })
       .catch((err) => console.log(err));
-  };
-  useEffect(() => checkLogin(), []);
+  }, []);
+  useEffect(() => checkLogin(), [checkLogin]);
 
   const navigate = useNavigate();
   //hàm đăng xuất

@@ -1,5 +1,5 @@
 import { Card, Form, Button, Container } from "react-bootstrap";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -7,7 +7,7 @@ const Login = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   //hàm kiểm tra người dùng đã đăng nhập chưa
-  const checkLogin = () => {
+  const checkLogin = useCallback(() => {
     fetch(
       "https://post-app-backend-express-session.onrender.com/users/check-login",
       {
@@ -24,8 +24,8 @@ const Login = () => {
         }
       })
       .catch((err) => console.log(err));
-  };
-  useEffect(() => checkLogin(), []);
+  }, []);
+  useEffect(() => checkLogin(), [checkLogin]);
 
   //state thông báo lỗi dữ liệu không hợp lệ
   const [errEmail, setErrEmail] = useState("");

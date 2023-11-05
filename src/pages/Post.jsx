@@ -1,5 +1,5 @@
 import { Form, Button, Container, Card } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 
@@ -23,7 +23,7 @@ const Post = () => {
 
   const navigate = useNavigate();
   //hàm kiểm tra người dùng đã đăng nhập chưa
-  const checkLogin = () => {
+  const checkLogin = useCallback(() => {
     fetch(
       "https://post-app-backend-express-session.onrender.com/users/check-login",
       {
@@ -38,11 +38,11 @@ const Post = () => {
         }
       })
       .catch((err) => console.log(err));
-  };
-  useEffect(() => checkLogin(), []);
+  }, []);
+  useEffect(() => checkLogin(), [checkLogin]);
 
   //hàm lấy danh sách bài viết để hiển thị
-  const fetchPosts = () => {
+  const fetchPosts = useCallback(() => {
     fetch("https://post-app-backend-express-session.onrender.com/posts/get", {
       method: "GET",
       credentials: "include",
@@ -57,8 +57,8 @@ const Post = () => {
         }
       })
       .catch((err) => console.log(err));
-  };
-  useEffect(() => fetchPosts(), []);
+  }, []);
+  useEffect(() => fetchPosts(), [fetchPosts]);
 
   useEffect(() => {
     socket.connect();

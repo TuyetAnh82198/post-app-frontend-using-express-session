@@ -1,7 +1,7 @@
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 
-const FormComponent = (props) => {
+const FormComponent = React.memo((props) => {
   //state title và content để post bài
   const [title, setTitle] = useState(props.title);
   const [content, setContent] = useState(props.content);
@@ -158,6 +158,6 @@ const FormComponent = (props) => {
       </Modal>
     </>
   );
-};
+});
 
 export default FormComponent;

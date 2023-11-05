@@ -20,10 +20,10 @@ function App() {
         { path: "/login", element: <Login /> },
         { path: "/post", element: <Post /> },
         { path: "/view/:id", element: <View /> },
-        { path: "/server-error", element: <Page500 /> },
-        { path: "*", element: <Page404 /> },
       ],
     },
+         { path: "/server-error", element: <Page500 /> },
+        { path: "*", element: <Page404 /> },
   ]);
   return <RouterProvider router={router} />;
 }
